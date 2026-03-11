@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rental Application</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f7f5f0;
+    --dark: #1a1a2e;
+    --gold: #c9a84c;
+    --text: #2d2d2d;
+    --muted: #777;
+    --white: #ffffff;
+    --border: #e0dbd0;
+    --focus: #c9a84c;
+  }
+
+  body {
+    background: var(--bg);
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    color: var(--text);
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--white);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 300;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+    animation: fadeUp 0.6s ease 0.1s both;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--dark);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--gold);
+    display: inline-block;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-grid.full { grid-template-columns: 1fr; }
+
+  @media (max-width: 500px) {
+    .form-grid { grid-template-columns: 1fr; }
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  input, select, textarea {
+    padding: 0.8rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: 'Lato', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--focus);
+    background: var(--white);
+  }
+
+  textarea { resize: vertical; min-height: 90px; }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 1.75rem 0;
+  }
+
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .checkbox-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    margin-top: 0.15rem;
+    accent-color: var(--dark);
+    padding: 0;
+  }
+
+  .checkbox-label {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 1.1rem;
+    background: var(--dark);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 0.03em;
+    transition: all 0.2s ease;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 15px rgba(26,26,46,0.2);
+  }
+
+  .submit-btn:hover {
+    background: #2d2d50;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(26,26,46,0.3);
+  }
+
+  .required { color: var(--gold); margin-left: 2px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="badge">Step 2 of 2</div>
+    <h1>Rental Application</h1>
+    <p class="subtitle">Please fill out all required fields accurately.</p>
+  </div>
+
+  <div class="card">
+    <form id="rentalForm" onsubmit="handleSubmit(event)">
+
+      <!-- Personal Info -->
+      <div class="section-title">Personal Information</div>
+      <div class="form-grid">
+        <div class="field">
+          <label>First Name <span class="required">*</span></label>
+          <input type="text" required placeholder="John" />
+        </div>
+        <div class="field">
+          <label>Last Name <span class="required">*</span></label>
+          <input type="text" required placeholder="Smith" />
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Date of Birth <span class="required">*</span></label>
+          <input type="date" required />
+        </div>
+        <div class="field">
+          <label>Phone Number <span class="required">*</span></label>
+          <input type="tel" required placeholder="(555) 000-0000" />
+        </div>
+      </div>
+      <div class="form-grid full">
+        <div class="field">
+          <label>Email Address <span class="required">*</span></label>
+          <input type="email" required placeholder="you@email.com" />
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Current Address -->
+      <div class="section-title">Current Address</div>
+      <div class="form-grid full">
+        <div class="field">
+          <label>Street Address <span class="required">*</span></label>
+          <input type="text" required placeholder="123 Main St" />
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>City <span class="required">*</span></label>
+          <input type="text" required placeholder="Cedar Rapids" />
+        </div>
+        <div class="field">
+          <label>State <span class="required">*</span></label>
+          <input type="text" required placeholder="IA" maxlength="2" />
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>ZIP Code <span class="required">*</span></label>
+          <input type="text" required placeholder="52401" maxlength="5" />
+        </div>
+        <div class="field">
+          <label>How Long at This Address?</label>
+          <input type="text" placeholder="e.g. 2 years" />
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Employment -->
+      <div class="section-title">Employment & Income</div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Employer Name <span class="required">*</span></label>
+          <input type="text" required placeholder="Company Name" />
+        </div>
+        <div class="field">
+          <label>Monthly Income <span class="required">*</span></label>
+          <input type="text" required placeholder="$0,000" />
+        </div>
+      </div>
+      <div class="form-grid full">
+        <div class="field">
+          <label>Employer Phone</label>
+          <input type="tel" placeholder="(555) 000-0000" />
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- References -->
+      <div class="section-title">References</div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Reference Name</label>
+          <input type="text" placeholder="Full Name" />
+        </div>
+        <div class="field">
+          <label>Relationship</label>
+          <input type="text" placeholder="e.g. Friend, Colleague" />
+        </div>
+      </div>
+      <div class="form-grid full">
+        <div class="field">
+          <label>Reference Phone</label>
+          <input type="tel" placeholder="(555) 000-0000" />
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Additional -->
+      <div class="section-title">Additional Information</div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Do you have pets?</label>
+          <select>
+            <option value="">Select...</option>
+            <option>No pets</option>
+            <option>1 pet</option>
+            <option>2 pets</option>
+            <option>3+ pets</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Number of Occupants <span class="required">*</span></label>
+          <input type="number" required min="1" placeholder="1" />
+        </div>
+      </div>
+      <div class="form-grid full">
+        <div class="field">
+          <label>Anything else we should know?</label>
+          <textarea placeholder="Optional notes..."></textarea>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="agree" required />
+        <label for="agree" class="checkbox-label">
+          I certify that all information provided is accurate and complete. I understand that false information may result in denial of my application.
+        </label>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Application →</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    window.location.href = 'thankyou.html';
+  }
+</script>
+
+</body>
+</html>
+
