@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Confirmed — Access Your Application</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f7f5f0;
+    --dark: #1a1a2e;
+    --gold: #c9a84c;
+    --green: #2d9e6b;
+    --green-light: #edf7f2;
+    --text: #2d2d2d;
+    --muted: #777;
+    --white: #ffffff;
+    --border: #e0dbd0;
+  }
+
+  body {
+    background: var(--bg);
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .checkmark {
+    width: 80px;
+    height: 80px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 1.5rem;
+    animation: popIn 0.5s ease both;
+    box-shadow: 0 8px 30px rgba(45,158,107,0.3);
+  }
+
+  .header {
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--dark);
+    margin-bottom: 0.75rem;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+    animation: fadeUp 0.6s ease 0.2s both;
+    margin-bottom: 1.5rem;
+  }
+
+  .step-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+
+  .step-row:last-child { margin-bottom: 0; }
+
+  .step-num {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    background: var(--dark);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-top: 0.1rem;
+  }
+
+  .step-text strong {
+    display: block;
+    color: var(--dark);
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .step-text span {
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 1.5rem 0;
+  }
+
+  .app-btn {
+    display: block;
+    width: 100%;
+    padding: 1.1rem;
+    background: var(--green);
+    color: white;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 0.03em;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(45,158,107,0.25);
+  }
+
+  .app-btn:hover {
+    background: #238a5c;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(45,158,107,0.35);
+  }
+
+  .footer-note {
+    font-size: 0.78rem;
+    color: var(--muted);
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="checkmark">✓</div>
+
+  <div class="header">
+    <h1>Payment Confirmed!</h1>
+    <p class="subtitle">Thank you for submitting your application fee. You're one step away from completing your rental application.</p>
+  </div>
+
+  <div class="card">
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        <strong>Fee Received</strong>
+        <span>Your $35 application fee has been received. ✓</span>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        <strong>Complete Your Application</strong>
+        <span>Click the button below to fill out your rental application. It only takes a few minutes.</span>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        <strong>We'll Be In Touch</strong>
+        <span>Once submitted, we will review your application and contact you within 1–3 business days.</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <a href="YOUR_FORM_LINK_HERE" target="_blank" class="app-btn">
+      Click Here to Complete Your Application →
+    </a>
+  </div>
+
+  <div class="footer-note">
+    Keep your payment confirmation for your records.<br>
+    Need help? Reach out before submitting your application.
+  </div>
+</div>
+
+</body>
+</html>
+
